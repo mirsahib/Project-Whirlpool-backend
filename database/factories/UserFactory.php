@@ -48,3 +48,4 @@ $factory->define(App\Tenant::class, function (Faker $faker) {
 
     ];
 });
+//faker
