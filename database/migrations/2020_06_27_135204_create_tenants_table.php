@@ -24,7 +24,7 @@ class CreateTenantsTable extends Migration
             $table->string('dues');
             $table->string('pay_date');
             $table->string('comment');
-            $table->string('hrid');
+            $table->unsignedInteger('hrid')->index(); //home and room no
             $table->boolean('status');
             $table->date('exit');
             $table->timestamps();
