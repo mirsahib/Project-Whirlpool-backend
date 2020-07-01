@@ -18,6 +18,7 @@ class CreateMotherMetersTable extends Migration
     {
         Schema::create('mother_meters', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('tenant_id');
             $table->unsignedInteger('meter_number')->index();
             $table->unsignedInteger('assign_hrid')->index();//home or room no
             $table->string('type');
@@ -27,8 +28,7 @@ class CreateMotherMetersTable extends Migration
             $table->string('month');
             $table->string('pay_status');
             $table->timestamps();
-
-
+            $table->foreign('tenant_id')->references('id')->on('tenants');
             $table->foreign('assign_hrid')->references('hrid')->on('tenants');
         });
     }

@@ -9,7 +9,7 @@ class MotherMeter extends Model
 {
     //
 
-    protected $fillable = ['meter_number','hrid','type','consume_unit','bill_amount','year','month','pay_status'];
+    protected $fillable = ['tenant_id','meter_number','hrid','type','consume_unit','bill_amount','year','month','pay_status'];
     
     public function sub_meters(){
         return $this->hasMany(SubMeter::class);

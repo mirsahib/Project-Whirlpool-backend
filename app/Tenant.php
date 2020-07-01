@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use MotherMeter;
+use App\MotherMeter;
 
 class Tenant extends Model
 {
