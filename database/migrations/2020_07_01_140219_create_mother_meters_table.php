@@ -11,25 +11,21 @@ class CreateMotherMetersTable extends Migration
      *
      * @return void
      */
-
-    //protected $fillable = ['meter_number','hrid','type','consume_unit','bill_amount','year','month','pay_status'];
-
     public function up()
     {
         Schema::create('mother_meters', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('tenant_id');
-            $table->unsignedInteger('meter_number')->index();
-            $table->unsignedInteger('assign_hrid')->index();//home or room no
-            $table->string('type');
-            $table->string('consume_unit');
-            $table->string('bill_amount');
-            $table->string('year');
-            $table->string('month');
-            $table->string('pay_status');
+            $table->integer('tenant_id')->unsigned();
+            $table->integer('meter_num');
+            $table->string('type',15);
+            $table->bigInteger('consume_unit');
+            $table->bigInteger('bill');
+            $table->string('year',5);
+            $table->string('month',15);
             $table->timestamps();
+
             $table->foreign('tenant_id')->references('id')->on('tenants');
-            $table->foreign('assign_hrid')->references('hrid')->on('tenants');
+
         });
     }
 

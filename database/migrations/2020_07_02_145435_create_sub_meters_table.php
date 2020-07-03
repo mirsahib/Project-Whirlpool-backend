@@ -11,29 +11,21 @@ class CreateSubMetersTable extends Migration
      *
      * @return void
      */
-
-
     public function up()
     {
         Schema::create('sub_meters', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('mother_meter_id');
-            $table->unsignedInteger('assign_meter_num');
-            $table->unsignedInteger('rid');//home or room no
-            //$table->string('type');
-            $table->string('prev_reading');
-            $table->string('curr_reading');
-            $table->string('consume_unit');
-            $table->string('bill_amount');
-            $table->string('year');
-            $table->string('month');
-            $table->string('pay_status');
+            $table->integer('mother_meter_id')->unsigned();
+            $table->bigInteger('prev_reading');
+            $table->bigInteger('curr_reading');
+            $table->bigInteger('consume_unit');
+            $table->bigInteger('bill');
+            $table->string('year',5);
+            $table->string('month',15);
+            $table->string('pay_stat',10);
             $table->timestamps();
 
             $table->foreign('mother_meter_id')->references('id')->on('mother_meters');
-            $table->foreign('assign_meter_num')->references('meter_number')->on('mother_meters');
-            $table->foreign('rid')->references('assign_hrid')->on('mother_meters');
-
         });
     }
 

@@ -15,18 +15,18 @@ class CreateTenantsTable extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('nid');
+            $table->string('name',50);
+            $table->string('nid',50);
             $table->string('nid_img');
-            $table->string('phone');
-            $table->string('exp_rent');
-            $table->string('paid_rent');
-            $table->string('dues');
-            $table->string('pay_date');
+            $table->string('phone',50);
+            $table->integer('exp_rent');
+            $table->integer('paid_rent');
+            $table->integer('dues');
+            $table->date('pay_date');
             $table->string('comment');
-            $table->unsignedInteger('hrid')->index(); //home and room no
-            $table->boolean('status');
-            $table->date('exit');
+            $table->integer('hrid');
+            $table->string('status',10);
+            $table->date('exit_date');
             $table->timestamps();
         });
     }
