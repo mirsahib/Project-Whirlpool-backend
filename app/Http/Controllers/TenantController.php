@@ -44,16 +44,17 @@ class TenantController extends Controller
         $validateData = Validator::make($request->all(),[
             'name'=>'required',
             'nid'=>'required',
-            'nid_img'=>'required',
+            //'nid_img'=>'required',
             'phone'=>'required',
             'exp_rent'=>'required',
-            'paid_rent'=>'required',
-            'dues'=>'required',
-            'pay_date'=>'required',
+            'reg_date' =>'required',
+            //'paid_rent'=>'required',
+            //'dues'=>'required',
+            //'pay_date'=>'required',
             'comment'=>'required',
             'hrid'=>'required',
-            'status'=>'required',
-            'exit_date'=>'required',
+            //'status'=>'required',
+            //'exit_date'=>'required',
         ]);
         if($validateData->fails()){
             return response()->json([
@@ -61,22 +62,30 @@ class TenantController extends Controller
             ]);
         }else{
             $tenant = new Tenant;
-            $tenant->name = $request->name;
-            $tenant->nid = $request->nid;
-            $tenant->nid_img = $request->nid_img;
-            $tenant->phone = $request->phone;
-            $tenant->exp_rent = $request->exp_rent;
-            $tenant->paid_rent = $request->paid_rent;
-            $tenant->dues = $request->dues;
-            $tenant->pay_date = $request->pay_date;
-            $tenant->comment = $request->comment;
-            $tenant->hrid = $request->hrid;
-            $tenant->status = $request->status;
-            $tenant->exit_date = $request->exit_date;
-            $tenant->save();
-            return response()->json([
-                'message'=>'Tenant Created Successfully','tenant'=>$tenant
-            ]);
+            if($request->nid_img){
+                $tenant->name = $request->name;
+                $tenant->nid = $request->nid;
+                $tenant->nid_img = $request->nid_img;
+                $tenant->phone = $request->phone;
+                $tenant->reg_date = $request->reg_date;
+                $tenant->exp_rent = $request->exp_rent;
+                $tenant->hrid = $request->hrid;
+                $tenant->save();
+                return response()->json([
+                    'message'=>'Tenant Created Successfully','tenant'=>$tenant
+                ]);
+            }else{
+                $tenant->name = $request->name;
+                $tenant->nid = $request->nid;
+                $tenant->phone = $request->phone;
+                $tenant->reg_date = $request->reg_date;
+                $tenant->exp_rent = $request->exp_rent;
+                $tenant->hrid = $request->hrid;
+                $tenant->save();
+                return response()->json([
+                    'message'=>'Tenant Created Successfully','tenant'=>$tenant
+                ]);
+            }
         }
     }
 

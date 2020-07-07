@@ -18,6 +18,7 @@ $factory->define(Tenant::class, function (Faker $faker) {
         'exp_rent'=>$faker->numberBetween($min = 1000, $max = 3000),
         'paid_rent'=>$faker->numberBetween($min = 1000, $max = 3000),
         'dues'=>$faker->numberBetween($min = 1000, $max = 1500),
+        'reg_date'=>$faker->date($format = 'Y-m-d', $max = 'now'),
         'pay_date'=>$faker->date($format = 'Y-m-d', $max = 'now'),
         'comment'=>$faker->text,
         'hrid'=>$faker->ean8,
