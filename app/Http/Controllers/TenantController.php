@@ -51,7 +51,7 @@ class TenantController extends Controller
             //'paid_rent'=>'required',
             //'dues'=>'required',
             //'pay_date'=>'required',
-            'comment'=>'required',
+            //'comment'=>'required',
             'hrid'=>'required',
             //'status'=>'required',
             //'exit_date'=>'required',
