@@ -21,7 +21,7 @@ $factory->define(Tenant::class, function (Faker $faker) {
         'reg_date'=>$faker->date($format = 'Y-m-d', $max = 'now'),
         'pay_date'=>$faker->date($format = 'Y-m-d', $max = 'now'),
         'comment'=>$faker->text,
-        'hrid'=>$faker->ean8,
+        'hrid'=>$faker->numberBetween($min = 100, $max = 110),
         'status'=>$faker->randomElement(['Exists','Not Exists']),
         'exit_date'=>$faker->date($format = 'Y-m-d', $max = 'now'),
     ];
