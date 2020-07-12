@@ -7,11 +7,16 @@ use App\MotherMeter;
 use App\SubMeter;
 use Faker\Generator as Faker;
 
-$factory->define(House::class,function (Faker $faker){
+
+$factory->define(App\House::class, function (Faker $faker) {
+
+    static $count = 101;
     return [
-        'size'=>$faker->numberBetween($min = 100, $max = 300),
+        'hrid' => $count++,
     ];
 });
+
+
 
 $factory->define(Tenant::class, function (Faker $faker) {
 
@@ -27,7 +32,6 @@ $factory->define(Tenant::class, function (Faker $faker) {
         'reg_date'=>$faker->date($format = 'Y-m-d', $max = 'now'),
         'pay_date'=>$faker->date($format = 'Y-m-d', $max = 'now'),
         'comment'=>$faker->text,
-        
         'status'=>$faker->randomElement(['Exists','Not Exists']),
         'exit_date'=>$faker->date($format = 'Y-m-d', $max = 'now'),
     ];
@@ -57,3 +61,4 @@ $factory->define(SubMeter::class, function (Faker $faker) {
 
     ];
 });
+

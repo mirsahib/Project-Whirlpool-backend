@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Tenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 
 class TenantController extends Controller
@@ -17,7 +18,9 @@ class TenantController extends Controller
     public function index()
     {
         //
-        $tenants = Tenant::all();
+        //$tenants = Tenant::all();
+
+        $tenants = DB::select(DB::raw("SELECT * from houses,tenants where houses.id=tenants.house_id"));
         return response()->json(['tenants'=>$tenants]);
     }
 
@@ -99,7 +102,10 @@ class TenantController extends Controller
     {
         //
 
-        $tenant = Tenant::find($id);
+        $tenant = DB::select(DB::raw("SELECT * from houses,tenants where tenants.id=:id AND houses.id=tenants.house_id"),array(
+            'id'=>$id
+        ));
+        //$tenant = Tenant::find($id);
         if($tenant){
             return response()->json(['tenant'=>$tenant]);
         }else{
