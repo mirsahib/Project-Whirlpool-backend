@@ -1,11 +1,17 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-
+use App\House;
 use App\Tenant;
 use App\MotherMeter;
 use App\SubMeter;
 use Faker\Generator as Faker;
+
+$factory->define(House::class,function (Faker $faker){
+    return [
+        'size'=>$faker->numberBetween($min = 100, $max = 300),
+    ];
+});
 
 $factory->define(Tenant::class, function (Faker $faker) {
 
@@ -21,7 +27,7 @@ $factory->define(Tenant::class, function (Faker $faker) {
         'reg_date'=>$faker->date($format = 'Y-m-d', $max = 'now'),
         'pay_date'=>$faker->date($format = 'Y-m-d', $max = 'now'),
         'comment'=>$faker->text,
-        'hrid'=>$faker->numberBetween($min = 100, $max = 110),
+        
         'status'=>$faker->randomElement(['Exists','Not Exists']),
         'exit_date'=>$faker->date($format = 'Y-m-d', $max = 'now'),
     ];

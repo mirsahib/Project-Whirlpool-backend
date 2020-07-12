@@ -25,10 +25,12 @@ class CreateTenantsTable extends Migration
             $table->date('reg_date');
             $table->date('pay_date')->default("2020-01-01");
             $table->string('comment')->default("Earum eligendi reprehenderit impedit eveniet. Omnis et optio voluptatem dolorum non.");
-            $table->integer('hrid');
+            $table->integer('house_id')->unsigned();
             $table->string('status',10)->default('NULL');
             $table->date('exit_date')->default('2020-01-01');
             $table->timestamps();
+
+            $table->foreign('house_id')->references('id')->on('houses');
         });
     }
 
