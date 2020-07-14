@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tenant;
+use App\House;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -55,24 +56,27 @@ class TenantController extends Controller
             //'dues'=>'required',
             //'pay_date'=>'required',
             //'comment'=>'required',
-            'hrid'=>'required',
+            'house_id'=>'required',
             //'status'=>'required',
             //'exit_date'=>'required',
         ]);
         if($validateData->fails()){
-            return response()->json([
-                'message'=>'Invalid input'
-            ]);
+            return response()->json($validateData->messages(), 404);
         }else{
             $tenant = new Tenant;
+            $house  = House::find($request->house_id);
             if($request->nid_img){
                 $tenant->name = $request->name;
                 $tenant->nid = $request->nid;
                 $tenant->nid_img = $request->nid_img;
                 $tenant->phone = $request->phone;
-                $tenant->reg_date = $request->reg_date;
                 $tenant->exp_rent = $request->exp_rent;
-                $tenant->hrid = $request->hrid;
+                $tenant->reg_date = $request->reg_date;
+                $tenant->house_id = $request->house_id;
+
+                //$tenant->house_id = $house->id;
+                //$tenant->house()->associate($house);
+
                 $tenant->save();
                 return response()->json([
                     'message'=>'Tenant Created Successfully','tenant'=>$tenant
@@ -81,9 +85,12 @@ class TenantController extends Controller
                 $tenant->name = $request->name;
                 $tenant->nid = $request->nid;
                 $tenant->phone = $request->phone;
-                $tenant->reg_date = $request->reg_date;
                 $tenant->exp_rent = $request->exp_rent;
-                $tenant->hrid = $request->hrid;
+                $tenant->reg_date = $request->reg_date;
+                $tenant->house_id = $request->house_id;
+                $tenant->house_id = $request->house_id;
+                //$tenant->house_id = $house->id;
+                //$tenant->house()->associate($house);
                 $tenant->save();
                 return response()->json([
                     'message'=>'Tenant Created Successfully','tenant'=>$tenant
