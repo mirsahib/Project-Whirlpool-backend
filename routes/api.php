@@ -24,3 +24,6 @@ use Illuminate\Support\Facades\Route;
 Route::resource('tenants', 'TenantController');
 Route::resource('mm', 'MotherMeterController');
 Route::resource('sm', 'SubMeterController');
+Route::get('houses/vacant', 'HouseController@vacant');
+Route::resource('houses', 'HouseController');
+
