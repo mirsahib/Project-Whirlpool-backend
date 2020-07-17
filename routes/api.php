@@ -29,4 +29,6 @@ Route::resource('houses', 'HouseController');
 Route::get('payments','PaymentController@index');
 Route::get('payments/edit/{id}','PaymentController@edit');
 Route::post('payments/update/{id}','PaymentController@update');
+Route::get('payments/paid','PaymentController@paid');
+Route::get('payments/unpaid','PaymentController@unpaid');
 
