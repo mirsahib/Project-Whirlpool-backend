@@ -16,10 +16,12 @@ class DatabaseSeeder extends Seeder
             // Seed the relation with one address
             $tenant = factory(App\Tenant::class)->make();
             $mother = factory(App\MotherMeter::class)->make();
-            $sub_meter = factory(App\SubMeter::class)->make();
-            $house->tenant()->save($tenant);
+            $sub_meter = factory(App\SubMeter::class,5)->make();
+            $payment = factory(App\Payment::class,5)->make();
+            $house->tenants()->save($tenant);
             $house->motherMeter()->save($mother);
-            $mother->sub_meters()->save($sub_meter);
+            $tenant->payments()->saveMany($payment);
+            $mother->sub_meters()->saveMany($sub_meter);
         });
     }
 }

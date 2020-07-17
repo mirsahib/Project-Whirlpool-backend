@@ -26,4 +26,7 @@ Route::resource('mm', 'MotherMeterController');
 Route::resource('sm', 'SubMeterController');
 Route::get('houses/vacant', 'HouseController@vacant');
 Route::resource('houses', 'HouseController');
+Route::get('payments','PaymentController@index');
+Route::get('payments/edit/{id}','PaymentController@edit');
+Route::post('payments/update/{id}','PaymentController@update');
 

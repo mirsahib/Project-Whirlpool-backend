@@ -19,17 +19,11 @@ class CreateTenantsTable extends Migration
             $table->string('nid',50);
             $table->string('nid_img')->default("https://via.placeholder.com/150");
             $table->string('phone',50);
-            $table->integer('exp_rent');
-            $table->integer('paid_rent')->default(0);
-            $table->integer('dues')->default(0);
             $table->date('reg_date');
-            $table->date('pay_date')->default("2020-01-01");
-            $table->string('comment')->default("Earum eligendi reprehenderit impedit eveniet. Omnis et optio voluptatem dolorum non.");
             $table->integer('house_id')->unsigned();
-            $table->string('status',10)->default('NULL');
+            $table->boolean('tenant_status')->default(0);
             $table->date('exit_date')->default('2020-01-01');
             $table->timestamps();
-
             $table->foreign('house_id')->references('id')->on('houses');
         });
     }

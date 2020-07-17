@@ -3,13 +3,13 @@
 namespace App;
 
 use App\Tenant;
-use App\motherMeter;
+use App\MotherMeter;
 use Illuminate\Database\Eloquent\Model;
 
 class House extends Model
 {
     //
-    public function tenant(){
+    public function tenants(){
         return $this->hasOne(Tenant::class);
     }
     public function motherMeter(){

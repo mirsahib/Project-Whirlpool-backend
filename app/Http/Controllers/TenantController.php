@@ -161,7 +161,7 @@ class TenantController extends Controller
         if($validateData->fails()){
             return response()->json(["message"=>$validateData->messages()], 404);
         }else{
-            $tenant = new Tenant;
+            $tenant = Tenant::find($id);
             $house  = House::find($request->house_id);
             if($request->nid_img){
                 $tenant->name = $request->name;
