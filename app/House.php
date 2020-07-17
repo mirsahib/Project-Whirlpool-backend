@@ -10,7 +10,7 @@ class House extends Model
 {
     //
     public function tenants(){
-        return $this->hasOne(Tenant::class);
+        return $this->hasMany(Tenant::class);
     }
     public function motherMeter(){
         return $this->hasOne(MotherMeter::class);

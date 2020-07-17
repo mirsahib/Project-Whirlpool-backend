@@ -14,13 +14,19 @@ class DatabaseSeeder extends Seeder
     {
         factory(App\House::class, 10)->create()->each(function ($house) {
             // Seed the relation with one address
-            $tenant = factory(App\Tenant::class)->make();
+            $tenants = factory(App\Tenant::class,5)->make();
             $mother = factory(App\MotherMeter::class)->make();
             $sub_meter = factory(App\SubMeter::class,5)->make();
-            $payment = factory(App\Payment::class,5)->make();
-            $house->tenants()->save($tenant);
+            
+            $house->tenants()->saveMany($tenants);
             $house->motherMeter()->save($mother);
-            $tenant->payments()->saveMany($payment);
+
+            //$tenant->payments()->saveMany($payment);
+            $tenants->each(function($tenant){
+                $payment = factory(App\Payment::class,5)->make();
+                $tenant->payments()->saveMany($payment);
+            });
+
             $mother->sub_meters()->saveMany($sub_meter);
         });
     }
