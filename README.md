@@ -1,53 +1,31 @@
 
 
-## House Rental Manegment System (HRMS)
+## House Rental Manegment System (HRMS) REST API
 
+## Overview
+The HRMS is an REST API to manage the tenant in my house.HRMS is build on laravel framework
 
 
 ## Api
-## Update User Profile
-Update the profile for a specific user account.
 
-`PUT /account/{userId}/profile`
+### HTTP requests
+All API requests are made by sending a secure HTTPS request using one of the following methods, depending on the action being taken:
 
-### Headers
-- **AuthSessionId** - Identifier for current session
-- **AuthSessionSecret** - Secret for current session
+* `POST` Create a resource
+* `PUT` Update a resource
+* `GET` Get a resource or list of resources
+* `DELETE` Delete a resource
 
-### Parameters
-- **userId** - Identifier for current user
+### Tenant 
 
-### Body
-- **username** - Username to update to
-- **email** - E-mail address to update to
-
-### Response
-- **userId** - Identifier for the user
-
-### Errors
-- **ErrorCode1** - Caused by missing identifier
-- **ErrorCode2** - Username was not given
-- **ErrorCode3** - Server exploded
-
-### Example Request
-`GET /account/1692/profile`
-
-```javascript
-{
-	username: "NewUsername",
-	email: "Email@Email.com"
-}
-```
-
-### Example Response
-`200 OK`
-
-```javascript
-{
-	userId: 1692
-}
-```
-
+| TYPE | URL | Parameter | Body | Response
+| --- | --- | ---| --- | --- |
+| `GET` | `/api/tenants` | **none** | **none** | return all tenants
+| `GET` | `/api/tenants/{id}` | **id** - Identifier for current tenant  | **none** | return specific tenant
+| `POST`  |  `/api/tenants/create` | **none** | <ul><li>name</li><li>nid</li><li>nid_img</li><li>phone</li><li>rent</li><li>rent</li><li>reg_date</li></ul> | **none** |create new tenant 
+| `GET` | `/api/tenants/{id}/edit` | **id** - Identifier for current tenant | **none** | return specific tenant
+| `PUT/PATCH` | `/api/tenants/{id}` | **id** - Identifier for current tenant | <ul><li>name</li><li>nid</li><li>nid_img</li><li>phone</li><li>rent</li><li>rent</li><li>reg_date</li></ul> | none
+| `DELETE` | `api/tenants/{id}` | **id** - Identifier for current tenant | **none** | **none**
 
 
 
