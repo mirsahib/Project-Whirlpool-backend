@@ -16,7 +16,6 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tenant_id')->unsigned();
-            $table->integer('exp_rent');
             $table->integer('paid_rent')->default(0);
             $table->integer('dues')->default(0);
             $table->string('pay_month',15);

@@ -19,6 +19,7 @@ class CreateTenantsTable extends Migration
             $table->string('nid',50);
             $table->string('nid_img')->default("https://via.placeholder.com/150");
             $table->string('phone',50);
+            $table->integer('exp_rent');
             $table->date('reg_date');
             $table->integer('house_id')->unsigned();
             $table->boolean('tenant_status')->default(0);

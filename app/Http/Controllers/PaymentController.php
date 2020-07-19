@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Payment;
+use App\Tenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
 
 class PaymentController extends Controller
 {
@@ -17,17 +21,50 @@ class PaymentController extends Controller
 
     }
 
-    public function edit($id){
-        //$payment = ;
+    public function create(Request $request){
+        $validateData = Validator::make($request->all(),[
+            'month'=>'required',
+            'year'=>'required',
+        ]);
+        if($validateData->fails()){
+            return response()->json(["message"=>$validateData->messages()], 404);
+        }else{
+            $tenants = Tenant::where('tenant_status',1)->get();
+            foreach($tenants as $tenant){
+                $payment = new Payment;
+                $payment->tenant_id = $tenant->id;
+                $payment->pay_month = $request->month;
+                $payment->pay_year = $request->year;
+                $payment->save();
+            }
+            
+            return response()->json('success');
+        }
 
     }
 
     public function update(Request $request,$id){
-        return 'update working';
+        $validateData = Validator::make($request->all(),[
+            'paid_rent'=>'required',
+            'dues'=>'required',
+            'pay_status'=>'required',
+        ]);
+        if($validateData->fails()){
+            return response()->json(["message"=>$validateData->messages()], 404);
+        }else{
+            $payment = Payment::find($id);
+            $payment->paid_rent = $request->paid_rent;
+            $payment->dues = $request->dues;
+            $payment->pay_status = $request->pay_status;
+            $payment->save();
+            return response()->json(["message"=>"Payment Successful","Payment"=>$payment] );
+        }
     }
 
     public function paid(){
         $paid = DB::select(DB::raw("SELECT tenants.name,payments.* FROM tenants,payments WHERE tenants.id = payments.tenant_id AND payments.pay_status=:status"),array('status'=>1));
+        // $tenants = Tenant::select('name','id')->get();
+        // $payment = Payment::where(['tenant_id','=',$tenants->id],['pay_status','=',1])->get();
         return response()->json(['paid'=>$paid]);
 
     }
@@ -36,5 +73,22 @@ class PaymentController extends Controller
         $unPaid = DB::select(DB::raw("SELECT tenants.name,payments.* FROM tenants,payments WHERE tenants.id = payments.tenant_id AND payments.pay_status=:status"),array('status'=>0));
         return response()->json(['unpaid'=>$unPaid]);
 
+    }
+
+
+    public function search(Request $request){
+        $validateData = Validator::make($request->all(),[
+            'name'=>'required',
+            'pay_month'=>'required',
+            'pay_year'=>'required',
+        ]);
+        if($validateData->fails()){
+            return response()->json(["message"=>$validateData->messages()], 404);
+        }else{
+            $tenant = Tenant::where('name',$request->name)->get()->first()->id;
+            $payment = Payment::where('tenant_id',$tenant)->where('pay_month',$request->pay_month)->where('pay_year',$request->pay_year)->get();
+            return response()->json(["Record"=>$payment] );
+
+        }
     }
 }

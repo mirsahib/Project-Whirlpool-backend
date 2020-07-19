@@ -27,7 +27,7 @@ $factory->define(Tenant::class, function (Faker $faker) {
         'nid'=>$faker->ean8,
         'nid_img'=>$faker->imageUrl($width = 640, $height = 480),
         'phone'=>$faker->phoneNumber,
-        //'exp_rent'=>$faker->numberBetween($min = 1000, $max = 3000),
+        'exp_rent'=>$faker->numberBetween($min = 1000, $max = 3000),
         ///'paid_rent'=>$faker->numberBetween($min = 1000, $max = 3000),
         //'dues'=>$faker->numberBetween($min = 1000, $max = 1500),
         'reg_date'=>$faker->date($format = 'Y-m-d', $max = 'now'),
@@ -41,7 +41,6 @@ $factory->define(Tenant::class, function (Faker $faker) {
 });
 $factory->define(Payment::class, function (Faker $faker){
     return [
-        'exp_rent'=>$faker->numberBetween($min = 1000, $max = 3000),
         'paid_rent'=>$faker->numberBetween($min = 1000, $max = 3000),
         'dues'=>$faker->numberBetween($min = 1000, $max = 1500),
         'pay_month'=>$faker->monthName($max = 'now'),
