@@ -52,4 +52,4 @@ All API requests are made by sending a secure HTTPS request using one of the fol
 
 ## License
 
-The Project is closed-source software.
+The HRMS API is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
