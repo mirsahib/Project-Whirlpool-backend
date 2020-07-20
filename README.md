@@ -16,9 +16,21 @@ All API requests are made by sending a secure HTTPS request using one of the fol
 * `GET` Get a resource or list of resources
 * `DELETE` Delete a resource
 
-### Tenant 
 
-| TYPE | URL | Parameter | Body | Response | Description
+### Houses
+| Type | URL | Parameter | Body | Response | Description
+| --- | --- | ---| --- | --- | --- |
+| `GET` | `/api/houses` | **none** | **none** | return all houses
+| `GET` | `/api/houses/{id}` | **id** - Identifier for current tenant  | **none** | return specific house
+| `POST`  |  `/api/houses/create` | **none** |  | **none** | on successful response create new house
+| `GET` | `/api/houses/{id}/edit` | **id** - Identifier for current house | **none** | return specific house
+| `PUT/PATCH` | `/api/houses/{id}` | **id** - Identifier for current house |  | none
+| `DELETE` | `api/houses/{id}` | **id** - Identifier for current house | **none** | **none**
+
+
+### Tenants
+
+| Type | URL | Parameter | Body | Response | Description
 | --- | --- | ---| --- | --- | --- |
 | `GET` | `/api/tenants` | **none** | **none** | return all tenants
 | `GET` | `/api/tenants/{id}` | **id** - Identifier for current tenant  | **none** | return specific tenant
@@ -28,7 +40,7 @@ All API requests are made by sending a secure HTTPS request using one of the fol
 | `DELETE` | `api/tenants/{id}` | **id** - Identifier for current tenant | **none** | **none**
 
 ### Payment 
-| TYPE | URL | Parameter | Body | Response | Description
+| Type | URL | Parameter | Body | Response | Description
 | --- | --- | ---| --- | --- | --- |
 | `GET` | `/api/payments` | **none** | **none** | return all paid and unpaid rent
 | `POST` | `/api/payments/create` | **none** | <ul><li>month</li><li>year</li></ul> | **none** | 

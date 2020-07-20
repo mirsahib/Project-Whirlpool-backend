@@ -28,7 +28,7 @@ Route::get('houses/vacant', 'HouseController@vacant');
 Route::resource('houses', 'HouseController');
 Route::get('payments','PaymentController@index');
 Route::post('payments/create','PaymentController@create');
-Route::post('payments/update/{id}','PaymentController@update');
+Route::put('payments/update/{id}','PaymentController@update');
 Route::get('payments/paid','PaymentController@paid');
 Route::get('payments/unpaid','PaymentController@unpaid');
 Route::post('payments/search','PaymentController@search');
