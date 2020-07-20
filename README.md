@@ -12,36 +12,18 @@ The HRMS is an REST API to manage the tenant in my house.HRMS is build on larave
 ## [HRMS front-end](https://github.com/mirsahib/Project-Whirlpool-frontend.git)
 
 
-### Requirements
+## Requirements
 
 - Laravel 7
 - Passport
 - Composer
 - Artisan
 
-### Installation
-Step 1: Clone the repository
-```
-git clone https://github.com/mirsahib/Project-Whirlpool-backend.git
-```
-Step 2 : Download the required package 
+## Installation
 
-Step 3 : Run the command below 
-
-```sh
-$ composer update
-$ php artisan migrate
-$ php artisan storage:link
-```
-
-Step 4 :    
- - Create copy of .env.example with name .env.(For this you can run the following command)
-```
-copy .env.example .env 
- ```
- - This is your environment file which is required by laravel project
-
- - Open .env file and update this file with the code below
+[Read this document and follow the step carefully](https://devmarketer.io/learn/setup-laravel-project-cloned-github-com/)
+ 
+Add this to your .env file
 
  ```
  DB_CONNECTION=mysql
@@ -51,25 +33,6 @@ DB_DATABASE=project-whirlpool
 DB_USERNAME=root
 DB_PASSWORD=
  ```
-- Make sure you have a database name project-whirlpool
-
-- After that run following command
-
-```
-php artisan key:generate
-php artisan config:cache
-composer dump-autoload
-```
-- After that run your migration commands
-```
-php artisan migrate
-```
-
-- Now Run your project with following command
-```
-php artisan serve
-```
-
 
 ## Api
 
