@@ -35,8 +35,10 @@ $ php artisan storage:link
 ```
 
 Step 4 :    
- - Create copy of .env.example with name .env. 
- 
+ - Create copy of .env.example with name .env.(For this you can run the following command)
+```
+copy .env.example .env 
+ ```
  - This is your environment file which is required by laravel project
 
  - Open .env file and update this file with the code below
