@@ -1,0 +1,3 @@
+   "dbname=d2sldnnpefc9hn host=ec2-18-211-48-247.compute-1.amazonaws.com port=5432 user=rndhcgxupmvegg password=aff7a580d48ab2e8e3c7732088bd75bc938e98db698e1b884ff6ce8f12e5b86e sslmode=require"
+Connection URL:
+   postgres://rndhcgxupmvegg:aff7a580d48ab2e8e3c7732088bd75bc938e98db698e1b884ff6ce8f12e5b86e@ec2-18-211-48-247.compute-1.amazonaws.com:5432/d2sldnnpefc9hn
