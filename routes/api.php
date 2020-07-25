@@ -32,4 +32,6 @@ Route::put('payments/update/{id}','PaymentController@update');
 Route::get('payments/paid','PaymentController@paid');
 Route::get('payments/unpaid','PaymentController@unpaid');
 Route::post('payments/search','PaymentController@search');
+Route::post('payments/load','PaymentController@load_payment');
+
 

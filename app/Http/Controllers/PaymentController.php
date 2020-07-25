@@ -13,12 +13,37 @@ class PaymentController extends Controller
 {
     //
     public function index(){
-        //SELECT tenants.name,payments.* FROM tenants,payments WHERE tenants.id = payments.tenant_id
-        $paid = DB::select(DB::raw("SELECT tenants.name,payments.* FROM tenants,payments WHERE tenants.id = payments.tenant_id AND payments.pay_status=:status"),array('status'=>1));
-        $unPaid = DB::select(DB::raw("SELECT tenants.name,payments.* FROM tenants,payments WHERE tenants.id = payments.tenant_id AND payments.pay_status=:status"),array('status'=>0));
+        $paid = DB::table('payments')->where('payments.pay_status','=',1)
+        ->join('tenants','tenants.id','=','payments.tenant_id')->select('tenants.name',"payments.*")
+        ->get();
+        $unPaid = DB::table('payments')->where('payments.pay_status','=',0)
+        ->join('tenants','tenants.id','=','payments.tenant_id')->select('tenants.name',"payments.*")
+        ->get();
+
 
         return response()->json(['paid'=>$paid,'unpaid'=>$unPaid]);
+        
+    }
+    public function load_payment(Request $request){
+        $validateData = Validator::make($request->all(),[
+            'pay_month'=>'required',
+            'pay_year'=>'required',
+        ]);
+        if($validateData->fails()){
+            return response()->json(["message"=>$validateData->messages()], 404);
+        }else{
+            // $tenant = Tenant::where('name',$request->name)->get()->first()->id;
+            // $payment = Payment::where('tenant_id',$tenant)->where('pay_month',$request->pay_month)->where('pay_year',$request->pay_year)->get();
+            $payment = DB::table('payments')->where([
+                ['payments.pay_month','=',$request->pay_month],
+                ['payments.pay_year','=',$request->pay_year]
+            ])
+            ->join('tenants','tenants.id','=','payments.tenant_id')->select('tenants.name','tenants.exp_rent',"payments.*")
+            ->get();
+            
+            return response()->json(["Record"=>$payment] );
 
+        }
     }
 
     public function create(Request $request){
@@ -62,15 +87,21 @@ class PaymentController extends Controller
     }
 
     public function paid(){
-        $paid = DB::select(DB::raw("SELECT tenants.name,payments.* FROM tenants,payments WHERE tenants.id = payments.tenant_id AND payments.pay_status=:status"),array('status'=>1));
         // $tenants = Tenant::select('name','id')->get();
         // $payment = Payment::where(['tenant_id','=',$tenants->id],['pay_status','=',1])->get();
+        $paid = DB::table('payments')->where('payments.pay_status','=',1)
+        ->join('tenants','tenants.id','=','payments.tenant_id')->select('tenants.name',"payments.*")
+        ->get();
+
         return response()->json(['paid'=>$paid]);
 
     }
 
     public function unpaid(){
-        $unPaid = DB::select(DB::raw("SELECT tenants.name,payments.* FROM tenants,payments WHERE tenants.id = payments.tenant_id AND payments.pay_status=:status"),array('status'=>0));
+
+        $unPaid = DB::table('payments')->where('payments.pay_status','=',0)
+        ->join('tenants','tenants.id','=','payments.tenant_id')->select('tenants.name',"payments.*")
+        ->get();
         return response()->json(['unpaid'=>$unPaid]);
 
     }
