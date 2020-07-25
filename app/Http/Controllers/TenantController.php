@@ -21,8 +21,14 @@ class TenantController extends Controller
         //
         //$tenants = Tenant::all();
 
-        $tenants = DB::select(DB::raw("SELECT * from houses,tenants where houses.id=tenants.house_id"));//this is bad query
-        return response()->json(['tenants'=>$tenants]);
+        //$tenants = DB::select(DB::raw("SELECT * from houses,tenants where houses.id=tenants.house_id"));//this is bad query
+        $curr_tenants = DB::table('tenants')->where('tenants.tenant_status','=',1)
+        ->join('houses','houses.id','=','tenants.house_id')->select('tenants.*',"houses.hrid")
+        ->get();
+        $prev_tenants = DB::table('tenants')->where('tenants.tenant_status','=',0)
+        ->join('houses','houses.id','=','tenants.house_id')->select('tenants.*',"houses.hrid")
+        ->get();
+        return response()->json(['curr_tenants'=>$curr_tenants,'prev_tenants'=>$prev_tenants]);
     }
 
     /**
