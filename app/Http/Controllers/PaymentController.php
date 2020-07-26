@@ -34,14 +34,22 @@ class PaymentController extends Controller
         }else{
             // $tenant = Tenant::where('name',$request->name)->get()->first()->id;
             // $payment = Payment::where('tenant_id',$tenant)->where('pay_month',$request->pay_month)->where('pay_year',$request->pay_year)->get();
-            $payment = DB::table('payments')->where([
+            $paid = DB::table('payments')->where([
                 ['payments.pay_month','=',$request->pay_month],
-                ['payments.pay_year','=',$request->pay_year]
+                ['payments.pay_year','=',$request->pay_year],
+                ['payments.pay_status','=',1]
+            ])
+            ->join('tenants','tenants.id','=','payments.tenant_id')->select('tenants.name','tenants.exp_rent',"payments.*")
+            ->get();
+            $unpaid = DB::table('payments')->where([
+                ['payments.pay_month','=',$request->pay_month],
+                ['payments.pay_year','=',$request->pay_year],
+                ['payments.pay_status','=',0]
             ])
             ->join('tenants','tenants.id','=','payments.tenant_id')->select('tenants.name','tenants.exp_rent',"payments.*")
             ->get();
             
-            return response()->json(["Record"=>$payment] );
+            return response()->json(["paid"=>$paid,"unpaid"=>$unpaid] );
 
         }
     }
