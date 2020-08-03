@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register','api\authController@register');
 Route::post('/login','api\authController@login');
-Route::resource('tenants', 'TenantController');
+Route::resource('tenants', 'TenantController')->middleware('auth:api');
 Route::resource('mm', 'MotherMeterController');
 Route::resource('sm', 'SubMeterController');
 Route::get('houses/vacant', 'HouseController@vacant');
